@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 6904593072142851513}
   - component: {fileID: 2757877965759711136}
   - component: {fileID: 7464052808561605052}
+  - component: {fileID: 6839701537432365802}
   m_Layer: 0
   m_Name: SeaLion
   m_TagString: Player
@@ -282,12 +283,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375b97053497064409e218281cd09166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   gravitydelay: 0.2
   gravitydown: -9.81
   gravityup: 9.81
   GravityDifficultyMultiplier: 1
   playerInputs: 1
+--- !u!114 &6839701537432365802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1900173535939528709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 251e0d229b666a54c86e87c532cd35e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DeathScreenTime: 1
 --- !u!1 &2384186181512271893
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,7 +559,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375b97053497064409e218281cd09166, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   gravitydelay: 0.2
   gravitydown: -9.81
   gravityup: 9.81

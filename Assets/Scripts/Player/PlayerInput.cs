@@ -17,12 +17,6 @@ public class PlayerInput : MonoBehaviour
 
     // Situation Check Variables
     public bool playerInputs = true;
- 
-    void Start(){
-        // Get Player Components
-        playerRigidBody = player.GetComponent<Rigidbody>();
-        anim = player.GetComponent<Animator>();
-    }
 
     void Update()
     {
@@ -41,7 +35,7 @@ public class PlayerInput : MonoBehaviour
                 }
 
                 // Enable Jump Animation (Return to Run Animation)
-                anim.SetBool("Swim", true);
+                this.GetComponent<Animator>().SetBool("Swim", true);
 
             }
             else {
@@ -49,7 +43,7 @@ public class PlayerInput : MonoBehaviour
                 Physics.gravity = new Vector3(0, gravitydown, 0);
 
                 // Disable Jump Animation (Return to Run Animation)
-                anim.SetBool("Swim", false);
+                this.GetComponent<Animator>().SetBool("Swim", false);
             }
         }
     }
