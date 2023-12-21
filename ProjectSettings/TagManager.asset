@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Spawner
   - Despawner
+  - Collision
+  - ScriptEmpty
+  - Score
+  - Highscore
   layers:
   - Default
   - TransparentFX
