@@ -7,7 +7,7 @@ public class CollisionSpawn : MonoBehaviour
     
     // Variables determining Spawnrate etc all public for dynamic increase possibility
     public float[] Spawnpositions = {2f, -2f};
-    public float SpawnFrequency = 1.0f;
+    public float SpawnFrequency = 3.0f;
     public int SpawnAmount = 1;
     public int DifficultyStep = 3;
 
@@ -34,7 +34,7 @@ public class CollisionSpawn : MonoBehaviour
         playeScript = player.GetComponent<PlayerInput>();
 
         // Invoke the function to spawn Collision elements
-        InvokeRepeating("instance_of_object", 2.0f, SpawnFrequency);
+        SetSpawnFrequency();
       
     }
 
@@ -44,13 +44,20 @@ public class CollisionSpawn : MonoBehaviour
 
         // get position data of spawner
         position = position = spawner.transform.position;
-        position.y = Spawnpositions[Random.Range(0, 2)];
+        position.y = Spawnpositions[0];
        
         CollisionInstance = Instantiate(objectToSpawn, position, rotation);
         if (SpawnAmount > 1) {
             StartCoroutine(WaitForSpawning(SpawnFrequency, SpawnAmount));
         }
+        SetSpawnFrequency();
 
+    }
+
+    void SetSpawnFrequency()
+    {
+        SpawnFrequency = Random.Range(1.5f, 3.5f); // Generiere eine zufällige Zahl zwischen 2 und 5 (inklusive)
+        Invoke("instance_of_object", SpawnFrequency);
     }
 
     // wait for x amount of seconds, then reload to the main menu

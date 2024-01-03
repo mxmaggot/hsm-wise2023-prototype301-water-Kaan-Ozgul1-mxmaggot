@@ -1,71 +1,36 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class Highscore : MonoBehaviour
 {
-
     private TextMeshProUGUI highScoreText;
-    private GameObject highScoreTextObject;
+    private Score scoreScript;
 
-    private Score ScoreTextScript;
-    private GameObject scoreTextObject;
+    private string highscoreKey = "highscore";
 
-    private PlayerPrefsX playerPrefsX;
-    private GameObject scriptMasterEmpty;
+    void Start()
+    {
+        // Finde das Highscore Text-Element
+        highScoreText = GetComponent<TextMeshProUGUI>();
 
-    private string highscore = "highscore";
-    private int highscoreNumber = 0;
+        // Finde das Score-Skript
+        scoreScript = FindObjectOfType<Score>();
 
-    void Start() {
-
-        // get the Highscore Text element
-        highScoreTextObject = GameObject.FindWithTag("Highscore");
-        highScoreText = highScoreTextObject.GetComponent<TextMeshProUGUI>();
-
-        // get the Score Script
-        scoreTextObject = GameObject.FindWithTag("Score");
-        ScoreTextScript = scoreTextObject.GetComponent<Score>();
-
-        // get the Player Pref Script
-        scriptMasterEmpty = GameObject.FindWithTag("ScriptEmpty");
-        playerPrefsX = scriptMasterEmpty.GetComponent<PlayerPrefsX>();
-
-        // create playerpref entry for the first time
-        if (playerPrefsX.GetPlayerPrefs(highscore) == 0) {
-            playerPrefsX.SetSavePrefs(highscore, 0);
-        }
-    
-        // write highscore to text
-        highScoreText.text = playerPrefsX.GetPlayerPrefs(highscore).ToString();
-
+        // Hole den gespeicherten Highscore aus PlayerPrefs oder setze ihn auf 0, falls noch keiner gespeichert wurde
+        int savedHighscore = PlayerPrefs.GetInt(highscoreKey, 0);
+        highScoreText.text = savedHighscore.ToString();
     }
 
     void Update()
     {
-        // set highscore = score if score > highscore
-        if (ScoreTextScript.getRingCount() > playerPrefsX.GetPlayerPrefs(highscore)){
-            highScoreText.text = ScoreTextScript.getRingCount().ToString();
-        }
+        int currentScore = scoreScript.GetScore();
 
-        // Save the highscore
-        if (highscoreNumber != _setHighscore()){
-            highscoreNumber = _setHighscore();
-            playerPrefsX.SetSavePrefs(highscore, highscoreNumber);
+        // Wenn der aktuelle Score höher als der gespeicherte Highscore ist, aktualisiere den Highscore
+        if (currentScore > PlayerPrefs.GetInt(highscoreKey))
+        {
+            PlayerPrefs.SetInt(highscoreKey, currentScore);
+            highScoreText.text = currentScore.ToString();
         }
-    }
-
-    // compare scores and return highscore
-    private int _setHighscore(){
-        int highscoreNumber = 0;
-
-        if (ScoreTextScript.getRingCount() > playerPrefsX.GetPlayerPrefs(highscore)){
-            highscoreNumber = ScoreTextScript.getRingCount();
-        }
-        else {
-            highscoreNumber = playerPrefsX.GetPlayerPrefs(highscore);
-        }
-
-        return highscoreNumber;
     }
 }
+
