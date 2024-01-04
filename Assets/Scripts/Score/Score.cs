@@ -1,33 +1,31 @@
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
 
 public class Score : MonoBehaviour
 {
-    public int CollisionCounter = 0;
-    private TextMeshProUGUI ScoreText;
+    public TextMeshProUGUI scoreText;
+    private int score = 0;
 
-    private GameObject scoreTextObject;
-
-    private GameObject despawner;
-    private DespawnerGetScore despawnerScript;
-
-    void Start() {
-        scoreTextObject = GameObject.FindWithTag("Score");
-        ScoreText = scoreTextObject.GetComponent<TextMeshProUGUI>();
-    }
-
-    // set the Score Number Text to the Active Score
-    void Update()
+    void Start()
     {
-        ScoreText.text = getRingCount().ToString();    
+        scoreText.text = "Score: " + score;
     }
 
-    // get the Stone Count from the Despawner
-    public int getRingCount(){
-        despawner = GameObject.FindWithTag("Despawner");
-        despawnerScript = despawner.GetComponent<DespawnerGetScore>();
-
-        return despawnerScript.ScoreCount;
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Collision"))
+        {
+            IncreaseScore();
+            
+        }
+    }
+    public int GetScore()
+    {
+        return score;
+    }
+    void IncreaseScore()
+    {
+        score++;
+        scoreText.text = "Score: " + score;
     }
 }
