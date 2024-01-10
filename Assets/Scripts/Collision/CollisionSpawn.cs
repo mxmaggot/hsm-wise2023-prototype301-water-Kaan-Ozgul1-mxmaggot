@@ -7,7 +7,7 @@ public class CollisionSpawn : MonoBehaviour
     
     // Variables determining Spawnrate etc all public for dynamic increase possibility
     public float[] Spawnpositions = {2f, -2f};
-    public float SpawnFrequency = 3.0f;
+    public float SpawnFrequency = 5.0f;
     public int SpawnAmount = 1;
     public int DifficultyStep = 3;
 
